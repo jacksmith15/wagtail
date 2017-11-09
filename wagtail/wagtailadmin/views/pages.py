@@ -44,7 +44,7 @@ def index(request, parent_page_id=None):
     pages = parent_page.get_children().prefetch_related('content_type', 'sites_rooted_here')
 
     # Get page ordering
-    ordering = request.GET.get('ordering', '-latest_revision_created_at')
+    ordering = request.GET.get('ordering')
     if ordering not in [
         'title',
         '-title',
@@ -55,7 +55,7 @@ def index(request, parent_page_id=None):
         '-latest_revision_created_at',
         'ord'
     ]:
-        ordering = '-latest_revision_created_at'
+        ordering = parent_page.default_index_order or '-latest_revision_created_at'
 
     if ordering == 'ord':
         # preserve the native ordering from get_children()

@@ -354,6 +354,8 @@ class Page(six.with_metaclass(PageBase, AbstractPage, index.Indexed, Clusterable
     promote_panels = []
     settings_panels = []
 
+    default_index_order = False
+
     def __init__(self, *args, **kwargs):
         super(Page, self).__init__(*args, **kwargs)
         if not self.id:
